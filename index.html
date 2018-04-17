@@ -6,6 +6,7 @@
 	<title>New Project Template</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Berkshire+Swash|Ubuntu" rel="stylesheet">
 	<link href="css/style.min.css" rel="stylesheet">
 </head>
 
@@ -16,18 +17,28 @@
         <h1 class="text-light"></h1>
       </div>
 
-			<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<ul class="nav nav-tabs" id="navTabs" role="tablist">
 				<li class="nav-item">
-					<a class="nav-link active" id="books-tab" data-toggle="tab" href="#books" role="tab" aria-controls="books" aria-selected="true">Books</a>
+					<a class="nav-link active" id="books-tab" data-toggle="tab" href="#books" role="tab" aria-controls="books" aria-selected="true">
+						Books&nbsp;
+						<button class="btn btn-small btn-success px-2 py-0 ml-2 addBook" data-toggle="modal" data-target="#addBookModal">
+							&plus;
+						</button>
+					</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" id="borrowers-tab" data-toggle="tab" href="#borrowers" role="tab" aria-controls="borrowers" aria-selected="false">Borrowers</a>
+					<a class="nav-link" id="borrowers-tab" data-toggle="tab" href="#borrowers" role="tab" aria-controls="borrowers" aria-selected="false">
+						Borrowers&nbsp;
+						<button class="btn btn-small btn-success px-2 py-0 ml-2 addBorrower" data-toggle="modal" data-target="#addBorrowerModal">
+							&plus;
+						</button>
+					</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" id="libraries-tab" data-toggle="tab" href="#libraries" role="tab" aria-controls="libraries" aria-selected="false">Libraries</a>
 				</li>
 			</ul>
-			<div class="tab-content" id="myTabContent">
+			<div class="tab-content" id="listContainer">
 				<div class="tab-pane fade show active" id="books" role="tabpanel" aria-labelledby="books-tab">
 					<table class="table table-striped table-dark" id="books-table">
 						<thead>
@@ -46,10 +57,9 @@
 					<table class="table table-striped table-dark" id="borrowers-table">
 						<thead>
 							<tr>
-								<th scope="col">Image</th>
-								<th scope="col">Title</th>
-								<th scope="col">Description</th>
-								<th scope="col">Borrowed By</th>
+								<th scope="col">First Name</th>
+								<th scope="col">Last Name</th>
+								<th scope="col">Books Checked Out</th>
 							</tr>
 						</thead>
 						<tbody id="borrowersTableBody"></tbody>
@@ -78,22 +88,106 @@
 	</main>
 	<div class="d-none" id="templates">
 		<table>
-			<tr class="bookRow">
+			<tr class="bookRow" data-id="1">
 				<td><img class="img-fluid img-thumbnail bookImg" src="http://bookworship.com/wp-content/uploads/2014/04/the-uncommitted.jpg" alt="A book image"></td>
 				<td class="bookTitle">A Book Image</td>
 				<td class="bookDesc">A description of a test book</td>
 				<td>
 					<select class="bookBorrower" name="">
 						<option value="">Available</option>
-						<option value="borrowerOption">Bill S. Prestion, esq.</option>
-						<option value="borrowerOption">Ted</option>
-						<option value="borrowerOption">Keanu Reeves</option>
 					</select>
+				</td>
+				<td>
+					<button class="btn btn-danger btn-small px-2 py-0 ml-2 deleteBook">&times;</button>
+				</td>
+			</tr>
+			<tr class="borrowerRow" data-id="1">
+				<td class="borrowerFirstName">Zaphod</td>
+				<td class="borrowerLastName">Beeblebrox</td>
+				<td class="borrowedBooks">
+					<ul>
+						<li class="borrowedBook"></li>
+					</ul>
+				</td>
+				<td>
+					<button class="btn btn-danger btn-small px-2 py-0 ml-2 deleteBorrower">&times;</button>
 				</td>
 			</tr>
 		</table>
+
+		<option class="borrowerOption" data-id="1">Bill S. Prestion, esq.</option>
+
 	</div>
 
+	<div class="modal fade" id="addBookModal" tabindex="-1" role="dialog" aria-labelledby="addBookModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content bg-dark text-light">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="addBookModalLabel">Add Book</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+
+				<form id="addBookForm">
+
+		      <div class="modal-body">
+						<div class="form-group">
+							<label for="bookTitleInput">Title</label>
+							<input type="text" class="form-control" id="bookTitleInput" placeholder="A Tale of Two Cities">
+						</div>
+						<div class="form-group">
+							<label for="bookDescInput">Description</label>
+							<textarea class="form-control" id="bookDescInput" rows="3"></textarea>
+						</div>
+						<div class="form-group">
+							<label for="bookCoverImageURL">URL to Cover Image</label>
+							<input type="url" class="form-control" id="bookCoverImageURL" placeholder="https://www.example.com/bookCover.png">
+						</div>
+		      </div>
+
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <input type="submit" class="btn btn-primary" id="submitBook" value="Add Book">
+		      </div>
+
+				</form>
+	    </div>
+	  </div>
+	</div>
+
+	<div class="modal fade" id="addBorrowerModal" tabindex="-1" role="dialog" aria-labelledby="addBorrowerModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content bg-dark text-light">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="addBorrowerModalLabel">Add Borrower</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+
+				<form id="addBorrowerForm">
+
+		      <div class="modal-body">
+						<div class="form-group">
+							<label for="borrowerFirstNameInput">First Name</label>
+							<input type="text" class="form-control" id="borrowerFirstNameInput" placeholder="Zaphod">
+						</div>
+						<div class="form-group">
+							<label for="borrowerLastNameInput">Last Name</label>
+							<input type="text" class="form-control" id="borrowerLastNameInput" placeholder="Beeblebrox">
+						</div>
+		      </div>
+
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		        <input type="submit" class="btn btn-primary" id="submitBorrower" value="Add Borrower">
+		      </div>
+
+				</form>
+	    </div>
+	  </div>
+	</div>
 
   <!-- Necessary Scripts... Keep these at the bottom of your <body> tag :) -->
   <!-- Grunt's livereload script --><script src="//localhost:35729/livereload.js"></script>

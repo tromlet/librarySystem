@@ -1,11 +1,73 @@
 @import 'base';
 
+%fontUbuntu{
+  font-family: Ubuntu, sans-serif;
+}
+
+%modalInputFields{
+  background-color: #232529;
+  color: #ffffff;
+}
+
+body{
+  background-color: black;
+}
+
+.modal-body{
+  input{
+    @extend %modalInputFields;
+  }
+
+  input:focus{
+    @extend %modalInputFields;
+  }
+
+  textarea{
+    @extend %modalInputFields;
+  }
+
+  textarea:focus{
+    @extend %modalInputFields;
+  }
+}
+
 #books {
   table {
+
     tr {
-      img {
-        max-height: 100px;
+      height: auto;
+      max-height: 50px;
+      overflow-y: auto;
+
+      .bookTitle{
+        min-width: 200px;
+      }
+
+      .bookImg{
+        min-height: 200px;
       }
     }
   }
+}
+
+#navTabs{
+  @extend %fontUbuntu;
+  background-color: #222529;
+
+  .active{
+    background-color: #353A3F;
+  }
+
+  a{
+    color: #ffffff;
+  }
+}
+
+#listContainer{
+  @extend %fontUbuntu;
+  background-color: #222529;
+}
+
+#addBookModal{
+  @extend %fontUbuntu;
 }

@@ -1,2 +1,28 @@
-#books table tr img {
-  max-height: 100px; }
+#navTabs, #listContainer, #addBookModal {
+  font-family: Ubuntu, sans-serif; }
+
+.modal-body input, .modal-body input:focus, .modal-body textarea, .modal-body textarea:focus {
+  background-color: #232529;
+  color: #ffffff; }
+
+body {
+  background-color: black; }
+
+#books table tr {
+  height: auto;
+  max-height: 50px;
+  overflow-y: auto; }
+  #books table tr .bookTitle {
+    min-width: 200px; }
+  #books table tr .bookImg {
+    min-height: 200px; }
+
+#navTabs {
+  background-color: #222529; }
+  #navTabs .active {
+    background-color: #353A3F; }
+  #navTabs a {
+    color: #ffffff; }
+
+#listContainer {
+  background-color: #222529; }

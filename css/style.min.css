@@ -1,1 +1,1 @@
-#books table tr img{max-height:100px}
+#addBookModal,#listContainer,#navTabs{font-family:Ubuntu,sans-serif}.modal-body input,.modal-body input:focus,.modal-body textarea,.modal-body textarea:focus{background-color:#232529;color:#fff}body{background-color:#000}#books table tr{height:auto;max-height:50px;overflow-y:auto}#books table tr .bookTitle{min-width:200px}#books table tr .bookImg{min-height:200px}#navTabs{background-color:#222529}#navTabs .active{background-color:#353a3f}#navTabs a{color:#fff}#listContainer{background-color:#222529}
